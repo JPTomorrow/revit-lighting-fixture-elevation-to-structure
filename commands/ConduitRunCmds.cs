@@ -6,7 +6,7 @@ namespace JPMorrow.UI.ViewModels
 {
 	public partial class ParentViewModel
     {
-        public async void DisableEnable(Window window) {
+        public void DisableEnable(Window window) {
             try {
                 Disable_Txt = Disable_Txt.Equals("Disable") ? DisableSwitch[1] : DisableSwitch[0];
             }

@@ -18,6 +18,16 @@ using JPMorrow.Revit.Worksets;
 
 namespace MainApp
 {
+	public class FixtureLineGeo {
+		public Element Fixture { get; set; } 
+		public Line[] Lines { get; set; }
+
+		public FixtureLineGeo(Element fix, Line[] lines) {
+			Fixture = fix;
+			Lines = lines;
+		}
+	}
+
 	/// <summary>
 	/// Main Execution
 	/// </summary>
@@ -63,7 +73,7 @@ namespace MainApp
 				el_coll = new FilteredElementCollector(revit_info.DOC);
 			}
 
-			var lines = new List<(Element Fixture, Line[] Lines)>();
+			var lines = new List<FixtureLineGeo>();
 
 			if(!fixtures.Any()) {
 				debugger.show(err:"No Fixtures are visible in the current view: " + revit_info.DOC.ActiveView.Name);
@@ -155,7 +165,7 @@ namespace MainApp
 					revit_info.SEL.SetElementIds(sel);
 				}
 
-				lines.Add((fixture, temp_lines.ToArray()));
+				lines.Add(new FixtureLineGeo(fixture, temp_lines.ToArray()));
 			}
 
 			// TAG FIXTURES
